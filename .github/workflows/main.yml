@@ -16,9 +16,16 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Runs Karma tests
     steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12.8
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.8
+      - name: Install dependencies
+        run: npm install
+    
+    # Runs Karma tests
       - uses: actions/checkout@v2
       - name: Run Karma Tests
         uses: ahmedrizwan/angular-karma-test-action@v1.0.8
