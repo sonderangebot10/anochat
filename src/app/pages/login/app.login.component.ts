@@ -11,8 +11,8 @@ export class LoginComponent {
 
   groupIdValue: string;
 
-  constructor(public auth: AuthService, private router: Router) { 
-    if(auth.user$) {
+  constructor(public auth: AuthService, private router: Router) {
+    if (auth.user$) {
       this.router.navigate(['/user']);
     }
   }
