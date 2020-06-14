@@ -29,7 +29,7 @@ jobs:
       run: npm run lint
     - name: Build
       run: npm run build -- --prod
-    - name: Test
-      run: npm test -- --configuration=ci
+    - name: Angular run Karma tests
+      uses: ahmedrizwan/angular-karma-test-action@v1.0.8
     - name: E2E
       run: npm run e2e -- --configuration=ci
