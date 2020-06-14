@@ -26,6 +26,5 @@ jobs:
         run: npm install
     
     # Runs Karma tests
-      - uses: actions/checkout@v2
       - name: Run Karma Tests
-        uses: ahmedrizwan/angular-karma-test-action@v1.0.8
+        uses: ng test
