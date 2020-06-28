@@ -9,11 +9,10 @@ export class AppComponent {
   navbarState: boolean;
 
   collapseHeader() {
-    this.navbarState = true;
+    this.navbarState = false;
   }
 
   public onClose(value: boolean): void {
     this.navbarState = value;
-    console.log(value);
   }
 }

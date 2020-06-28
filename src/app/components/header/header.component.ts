@@ -13,6 +13,7 @@ export class HeaderComponent {
   @Output() navbarEventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(public auth: AuthService, public router: Router) {
+    this.navbarCollapsed = true;
   }
 
   collapseNavbar() {
