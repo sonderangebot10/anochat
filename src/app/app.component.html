@@ -1,4 +1,4 @@
 <app-header [navbarCollapsed]='navbarState' (navbarEventEmitter)="onClose($event)"></app-header>
-<div class='main' (click)="collapseHeader()">
+<div class='main' (click)="headerService.close()">
     <router-outlet></router-outlet>
 </div>
