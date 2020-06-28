@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'anochat';
+  navbarState: boolean;
+
+  collapseHeader() {
+    this.navbarState = true;
+  }
+
+  public onClose(value: boolean): void {
+    this.navbarState = value;
+    console.log(value);
+  }
 }

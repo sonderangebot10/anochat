@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -9,12 +9,17 @@ import { Router } from '@angular/router';
 })
 
 export class HeaderComponent {
-  constructor(public auth: AuthService, public router: Router) {
+  @Input() public navbarCollapsed: boolean;
+  @Output() navbarEventEmitter: EventEmitter<any> = new EventEmitter();
 
+  constructor(public auth: AuthService, public router: Router) {
   }
 
-  onC()
-  {
-    console.log('XXX');
+  collapseNavbar() {
+    this.navbarCollapsed = !this.navbarCollapsed;
+  }
+
+  emit() {
+    this.navbarEventEmitter.emit(this.navbarCollapsed);
   }
 }

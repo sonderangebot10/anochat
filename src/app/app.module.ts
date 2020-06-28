@@ -22,6 +22,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './components/header/header.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import { HeaderComponent } from './components/header/header.component';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
