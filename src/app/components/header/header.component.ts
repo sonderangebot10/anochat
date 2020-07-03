@@ -13,7 +13,7 @@ export class HeaderComponent {
   @Input() public navbarCollapsed: boolean;
 
   constructor(public auth: AuthService, public router: Router, public headerService: HeaderService) {
-    this.headerService.change.subscribe(isOpen => {
+    this.headerService.isOpenEmitter.subscribe(isOpen => {
       this.navbarCollapsed = isOpen;
     });
   }
