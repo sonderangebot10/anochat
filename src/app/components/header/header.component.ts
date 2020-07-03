@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +11,10 @@ import { Router } from '@angular/router';
 
 export class HeaderComponent {
   @Input() public navbarCollapsed: boolean;
-  @Output() navbarEventEmitter: EventEmitter<any> = new EventEmitter();
 
-  constructor(public auth: AuthService, public router: Router) {
-    this.navbarCollapsed = true;
-  }
-
-  collapseNavbar() {
-    this.navbarCollapsed = !this.navbarCollapsed;
-  }
-
-  emit() {
-    this.navbarEventEmitter.emit(this.navbarCollapsed);
+  constructor(public auth: AuthService, public router: Router, public headerService: HeaderService) {
+    this.headerService.isOpenEmitter.subscribe(isOpen => {
+      this.navbarCollapsed = isOpen;
+    });
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderService } from './components/header/header.service';
 
 @Component({
   selector: 'app-root',
@@ -6,13 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  navbarState: boolean;
 
-  collapseHeader() {
-    this.navbarState = false;
-  }
-
-  public onClose(value: boolean): void {
-    this.navbarState = value;
+  constructor(public headerService: HeaderService) {
   }
 }
