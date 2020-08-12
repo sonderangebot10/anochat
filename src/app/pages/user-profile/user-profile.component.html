@@ -1,7 +1,6 @@
 <div *ngIf="auth.user$ | async as user">
-    <h3>This is where you mangae your profile</h3>
     <h3>{{ user.displayName }}</h3>
-    <img  [src]="user.photoURL">
+    <img  [src]="user.photoURL" class="photo">
     <p>UID: {{ user.uid }}</p>
     <button mat-raised-button color="accent" (click)="auth.signOut()">Logout</button>
 </div>

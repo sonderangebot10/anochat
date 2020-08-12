@@ -23,6 +23,9 @@ import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './components/header/header.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RoomsWindowComponent } from './components/rooms-window/rooms-window.component';
+import { ChatWindowComponent } from './components/chat-window/chat-window.component';
+import { RoomUsersWindowComponent } from './components/room-users-window/room-users-window.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserProfileComponent,
     DashboardComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoomsWindowComponent,
+    ChatWindowComponent,
+    RoomUsersWindowComponent
   ],
   imports: [
     BrowserModule,
