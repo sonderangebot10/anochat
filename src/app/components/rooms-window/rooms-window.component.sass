@@ -1,0 +1,65 @@
+h3
+    margin-top: 5px
+
+button
+    margin-bottom: 15px
+
+.exit
+    background-position: right 10px center
+    visibility: hidden
+    height: 15px
+    width: 15px
+
+.roomBox
+    position: relative
+
+    h3
+        width: 100%
+        height: auto
+
+    img
+        position: absolute
+        top: 25%
+        right: 10%
+
+.exit    
+    &:active
+        height: 10px
+        width: 10px
+
+.room
+    &:hover
+        width: 95%
+        background-color: #ffd740
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25)
+        border-radius: 25px
+        cursor: pointer
+
+        .exit
+            visibility: visible
+
+.example-viewport 
+    height: 100%
+    width: 100%
+
+@media only screen and (min-width: 600px)
+    ::-webkit-scrollbar
+        width: 0px
+        background: transparent
+
+@media only screen and (max-width: 600px)
+    button
+        justify-content: center
+    mat-form-field
+        width: 80%
+        justify-content: center
+    .login
+        text-align: center
+
+    .room
+        &:hover
+            width: 100%
+            border-radius: 0px
+        
+.header
+    font-weight: bold

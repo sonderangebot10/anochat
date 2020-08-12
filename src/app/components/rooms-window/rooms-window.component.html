@@ -1,1 +1,27 @@
-<p>rooms-window works!</p>
+<cdk-virtual-scroll-viewport [itemSize]="50" class="example-viewport">
+    <h3 class="header">Room List</h3>
+    <div *ngIf="!isLoading">
+        <div class="room" *cdkVirtualFor="let room of rooms;">
+            <div class="roomBox">
+                <h3>{{ room.displayName }}</h3>
+                <img class="exit" src="./assets/close.svg" (click)="onCloseRoom(room.displayName)">
+            </div>
+        </div>
+    </div>
+    <form method="post" [formGroup]="registerForm" (ngSubmit)="onCreateRoom()">
+        <div class="login-form">
+            <div class="login">
+                <button mat-raised-button color="accent" type="submit">Create Room</button>
+                <mat-form-field>
+                    <input matInput type="text" formControlName="group_name" name="group_name" placeholder="Room Name *"/>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="text" formControlName="group_password" name="group_password" placeholder="Password"/>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="error">
+        <h3>{{ error }}</h3>
+    </div>
+</cdk-virtual-scroll-viewport>

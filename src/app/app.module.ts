@@ -20,12 +20,17 @@ import { FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HeaderComponent } from './components/header/header.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RoomsWindowComponent } from './components/rooms-window/rooms-window.component';
 import { ChatWindowComponent } from './components/chat-window/chat-window.component';
 import { RoomUsersWindowComponent } from './components/room-users-window/room-users-window.component';
+
+import { DatePipe } from '@angular/common';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -50,9 +55,14 @@ import { RoomUsersWindowComponent } from './components/room-users-window/room-us
     MatToolbarModule,
     MatInputModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    ScrollingModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
