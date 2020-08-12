@@ -21,12 +21,12 @@ export class RoomsWindowComponent implements OnInit {
   user: firebase.User;
   rooms: Room[];
 
-  error: string = '';
+  error = '';
 
   registerForm: FormGroup;
 
   constructor(
-    private afAuth: AngularFireAuth, 
+    private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private formBuilder: FormBuilder,
     private router: Router) {
@@ -42,28 +42,30 @@ export class RoomsWindowComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       group_name: ['', Validators.required],
-      group_password:['']
-    })
+      group_password: ['']
+    });
 
-    if(window.innerWidth > 600)
+    if (window.innerWidth > 600) {
       this.router.navigate(['/']);
+    }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    if(window.innerWidth > 600)
+    if (window.innerWidth > 600) {
       this.router.navigate(['/']);
+    }
   }
 
   onCreateRoom() {
     const roomInfo = this.registerForm.value;
 
-    if(roomInfo.group_name == '')
+    if (roomInfo.group_name === '')
     {
       this.error = 'Group name cannot be empty';
       return;
     }
-    if(roomInfo.group_name.length > 15)
+    if (roomInfo.group_name.length > 15)
     {
       this.error = 'Group name cannot be longer than 15 characters';
       return;
@@ -75,14 +77,14 @@ export class RoomsWindowComponent implements OnInit {
       password: roomInfo.group_password
     };
 
-    var room = this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomInfo.group_name}`);
+    const room = this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomInfo.group_name}`);
 
     room.get()
       .then(docSnapshot => {
         if (docSnapshot.exists) {
           this.error = 'Room name already exist';
         }
-        else if(this.rooms.length > 98) {
+        else if (this.rooms.length > 98) {
           this.error = 'Maximum number of rooms is 99';
         }
         else {
@@ -92,7 +94,6 @@ export class RoomsWindowComponent implements OnInit {
   }
 
   onCloseRoom(roomName: string) {
-    var room = this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomName}`);
-    room.delete();
+    this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomName}`).delete();
   }
 }
