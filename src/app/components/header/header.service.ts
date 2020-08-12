@@ -8,13 +8,11 @@ export class HeaderService {
   @Output() isOpenEmitter: EventEmitter<boolean> = new EventEmitter();
 
   toggle() {
-    console.log('toggle');
     this.isOpen = !this.isOpen;
     this.isOpenEmitter.emit(this.isOpen);
   }
 
   close() {
-    console.log('close');
     if (this.isOpen) {
         this.isOpen = !this.isOpen;
         this.isOpenEmitter.emit(this.isOpen);
