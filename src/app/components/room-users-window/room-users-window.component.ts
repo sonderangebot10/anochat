@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { RoomsService } from '../rooms-window/room-window.service';
+import { RoomService } from '../../services/room.service';
 
 import { Room } from '../../../models/room.model';
 
@@ -17,9 +17,9 @@ export class RoomUsersWindowComponent implements OnInit {
   room: Room;
 
   constructor(
-    public roomsService: RoomsService,
+    public roomService: RoomService,
     private router: Router) {
-      roomsService.openRoomEmitter.subscribe(room => {
+      roomService.openRoomEmitter.subscribe(room => {
         this.room = room;
       })
    }

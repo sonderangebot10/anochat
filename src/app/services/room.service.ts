@@ -3,10 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
-import { Room } from '../../../models/room.model';
+import { Room } from '../../models/room.model';
 
 @Injectable({ providedIn: 'root' })
-export class RoomsService {
+export class RoomService {
 
   private openRoom: Room; 
   user: firebase.User;  
@@ -44,7 +44,11 @@ export class RoomsService {
   }
 
   getRoomOwner() {
-    const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName)
+    if(this.rooms == null) {
+      return "No room selected";
+    }
+    
+    const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName);
 
     if(updatedRoom == null) {
         return "No room selected";
@@ -54,6 +58,10 @@ export class RoomsService {
   }
 
   getRoomUsers() {
+    if(this.rooms == null) {
+      return [];
+    }
+
     const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName)
     
     if(updatedRoom == null) {

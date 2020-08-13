@@ -1,10 +1,10 @@
 <cdk-virtual-scroll-viewport [itemSize]="50" class="example-viewport">
-    <h3 class="owner">{{ roomsService.getRoomOwner() }}</h3>
+    <h3 class="owner">{{ roomService.getRoomOwner() }}</h3>
     <div *ngIf="room != null">
-        <div class="user" *cdkVirtualFor="let user of roomsService.getRoomUsers();">
+        <div class="user" *cdkVirtualFor="let user of roomService.getRoomUsers();">
             <div class="userBox">
                 <h3>{{ user }}</h3>
-                <img class="exit" src="./assets/close.svg" (click)="roomsService.removeUser(user)">
+                <img class="exit" src="./assets/close.svg" (click)="roomService.removeUser(user)">
             </div>
         </div>
     </div>

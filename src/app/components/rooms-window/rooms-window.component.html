@@ -3,7 +3,7 @@
     <div *ngIf="!isLoading">
         <div class="room" *cdkVirtualFor="let room of rooms;">
             <div class="roomBox">
-                <h3 (click)="roomsService.toggle(room)">{{ room.displayName }}</h3>
+                <h3 (click)="roomService.toggle(room)">{{ room.displayName }}</h3>
                 <img class="exit" src="./assets/close.svg" (click)="onCloseRoom(room.displayName)">
             </div>
         </div>

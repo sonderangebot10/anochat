@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 
 import { Room } from '../../../models/room.model';
-import { RoomsService } from './room-window.service';
+import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-rooms-window',
@@ -29,15 +29,15 @@ export class RoomsWindowComponent implements OnInit {
     private afs: AngularFirestore,
     private formBuilder: FormBuilder,
     private router: Router,
-    public roomsService: RoomsService) {
+    public roomService: RoomService) {
       afAuth.authState.subscribe(user => {
         this.user = user;
         this.afs.collection<Room>(`users/${user.uid}/rooms`).valueChanges().subscribe(data => {
           this.rooms = data;
 
-          if(roomsService.getRoom() == null) {
+          if(roomService.getRoom() == null) {
             if(data.length > 0) {
-              roomsService.toggle(data[0]);
+              roomService.toggle(data[0]);
             }
           }
         });
@@ -97,7 +97,7 @@ export class RoomsWindowComponent implements OnInit {
           this.error = 'Maximum number of rooms is 99';
         }
         else {
-          room.set(newRoom, { merge: true }).then(_ => this.roomsService.toggle(newRoom));
+          room.set(newRoom, { merge: true }).then(_ => this.roomService.toggle(newRoom));
         }
       });
   }
@@ -108,14 +108,14 @@ export class RoomsWindowComponent implements OnInit {
       if(this.rooms.length > 0) {
         if(this.rooms[0].displayName === roomName)
         {
-            this.roomsService.toggle(this.rooms[1]);
+            this.roomService.toggle(this.rooms[1]);
         }
         else {
-          this.roomsService.toggle(this.rooms[0]);
+          this.roomService.toggle(this.rooms[0]);
         }
       }
       else {
-        this.roomsService.toggle(null);
+        this.roomService.toggle(null);
       }
     });
   }

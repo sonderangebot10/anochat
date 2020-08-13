@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RoomsService } from '../rooms-window/room-window.service';
+import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -9,8 +9,8 @@ import { RoomsService } from '../rooms-window/room-window.service';
 })
 export class ChatWindowComponent implements OnInit {
 
-  constructor(public roomsService: RoomsService) { 
-    
+  constructor(public roomService: RoomService) { 
+
   }
 
   ngOnInit(): void {
