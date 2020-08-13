@@ -12,7 +12,7 @@ export class ChatWindowComponent implements OnInit {
 
   room: Room;
 
-  constructor(public roomService: RoomService) { 
+  constructor(public roomService: RoomService) {
     roomService.openRoomEmitter.subscribe(room => this.room = room);
   }
 

@@ -35,8 +35,8 @@ export class RoomsWindowComponent implements OnInit {
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
           this.rooms = data;
 
-          if(roomService.getRoom() == null) {
-            if(data.length > 0) {
+          if (roomService.getRoom() == null) {
+            if (data.length > 0) {
               roomService.toggle(data[0]);
             }
           }
@@ -78,9 +78,9 @@ export class RoomsWindowComponent implements OnInit {
       return;
     }
 
-    let uid = uuid.v4();
+    const uid = uuid.v4();
     const newRoom = {
-      uid: uid,
+      uid,
       displayName: roomInfo.group_name,
       password: roomInfo.group_password,
       owner: this.user.displayName,
@@ -88,10 +88,10 @@ export class RoomsWindowComponent implements OnInit {
       guests: []
     };
 
-    if(this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === roomInfo.displayName))
+    if (this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === roomInfo.displayName))
     {
       return this.error = 'Room name already exist';
-    } 
+    }
     else if (this.rooms.length > 98) {
       return this.error = 'Maximum number of rooms is 99';
     }
@@ -99,7 +99,7 @@ export class RoomsWindowComponent implements OnInit {
     const room = this.afs.firestore.doc(`rooms/${uid}`);
 
     room.get()
-      .then(_ => room.set(newRoom, { merge: true }).then(_ => this.roomService.toggle(newRoom)));
+      .then(_ => room.set(newRoom, { merge: true }).then(ss => this.roomService.toggle(newRoom)));
   }
 
   onCloseRoom(roomName: string) {
@@ -107,8 +107,8 @@ export class RoomsWindowComponent implements OnInit {
 
     this.afs.firestore.doc(`rooms/${roomToDelete.uid}`).delete()
     .then(_ => {
-      if(this.rooms.length > 0) {
-        if(this.rooms[0].displayName === roomName)
+      if (this.rooms.length > 0) {
+        if (this.rooms[0].displayName === roomName)
         {
             this.roomService.toggle(this.rooms[1]);
         }
