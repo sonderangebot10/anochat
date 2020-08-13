@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
 import { Room } from '../../models/room.model';
+import { defaultThrottleConfig } from 'rxjs/internal/operators/throttle';
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
@@ -17,13 +18,8 @@ export class RoomService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore) {
-        afAuth.authState.subscribe(user => {
-            this.user = user;
-
-            this.afs.collection<Room>(`users/${user.uid}/rooms`).valueChanges().subscribe(data => {
-                this.rooms = data;
-            });
-        })
+        afAuth.authState.subscribe(user => this.user = user);
+        this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => this.rooms = data);        
    }
 
   toggle(room: Room) {
@@ -31,51 +27,15 @@ export class RoomService {
     this.openRoomEmitter.emit(this.openRoom);
   }
 
-  getRoomName() {
-    if(this.openRoom == null) {
-        return "No room selected";
-    }
-
-    return this.openRoom.displayName;
-  }
-
   getRoom() {
     return this.openRoom;
   }
 
-  getRoomOwner() {
-    if(this.rooms == null) {
-      return "No room selected";
-    }
-    
-    const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName);
-
-    if(updatedRoom == null) {
-        return "No room selected";
-    }
-
-    return updatedRoom.owner;
-  }
-
-  getRoomUsers() {
-    if(this.rooms == null) {
-      return [];
-    }
-
-    const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName)
-    
-    if(updatedRoom == null) {
-        return [];
-    }
-    
-    return updatedRoom.guests;
-  }
-
   removeUser(username: string) {
-    this.afs.firestore.collection(`users/${this.user.uid}/rooms`).doc(this.openRoom.displayName).update({
+    this.afs.firestore.collection(`rooms`).doc(this.openRoom.uid).update({
         "guests": firebase.firestore.FieldValue.arrayRemove(username)
     }).then(_ => {
-        const updatedRoom = this.rooms.find(x => x.displayName === this.openRoom.displayName)
+        const updatedRoom = this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === this.openRoom.displayName)
         this.toggle(updatedRoom);
     });
     

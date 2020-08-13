@@ -3,5 +3,6 @@ export interface Room {
     displayName: string;
     password?: string;
     owner: string;
+    ownerId: string;
     guests: string[];
   }

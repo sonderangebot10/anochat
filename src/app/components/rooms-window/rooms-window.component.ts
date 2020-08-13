@@ -32,7 +32,7 @@ export class RoomsWindowComponent implements OnInit {
     public roomService: RoomService) {
       afAuth.authState.subscribe(user => {
         this.user = user;
-        this.afs.collection<Room>(`users/${user.uid}/rooms`).valueChanges().subscribe(data => {
+        this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
           this.rooms = data;
 
           if(roomService.getRoom() == null) {
@@ -78,32 +78,34 @@ export class RoomsWindowComponent implements OnInit {
       return;
     }
 
+    let uid = uuid.v4();
     const newRoom = {
-      uid: uuid.v4(),
+      uid: uid,
       displayName: roomInfo.group_name,
       password: roomInfo.group_password,
       owner: this.user.displayName,
+      ownerId: this.user.uid,
       guests: []
     };
 
-    const room = this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomInfo.group_name}`);
+    if(this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === roomInfo.displayName))
+    {
+      return this.error = 'Room name already exist';
+    } 
+    else if (this.rooms.length > 98) {
+      return this.error = 'Maximum number of rooms is 99';
+    }
+
+    const room = this.afs.firestore.doc(`rooms/${uid}`);
 
     room.get()
-      .then(docSnapshot => {
-        if (docSnapshot.exists) {
-          this.error = 'Room name already exist';
-        }
-        else if (this.rooms.length > 98) {
-          this.error = 'Maximum number of rooms is 99';
-        }
-        else {
-          room.set(newRoom, { merge: true }).then(_ => this.roomService.toggle(newRoom));
-        }
-      });
+      .then(_ => room.set(newRoom, { merge: true }).then(_ => this.roomService.toggle(newRoom)));
   }
 
   onCloseRoom(roomName: string) {
-    this.afs.firestore.doc(`users/${this.user.uid}/rooms/${roomName}`).delete()
+    const roomToDelete = this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === roomName);
+
+    this.afs.firestore.doc(`rooms/${roomToDelete.uid}`).delete()
     .then(_ => {
       if(this.rooms.length > 0) {
         if(this.rooms[0].displayName === roomName)

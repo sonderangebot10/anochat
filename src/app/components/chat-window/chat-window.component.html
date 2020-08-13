@@ -1,1 +1,3 @@
-<h3 class="header">{{ roomService.getRoomName() }}</h3>
+<div *ngIf="room != null">
+    <h3 class="header">{{ room.displayName }}</h3>
+</div>

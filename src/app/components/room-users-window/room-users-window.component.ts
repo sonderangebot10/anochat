@@ -19,9 +19,7 @@ export class RoomUsersWindowComponent implements OnInit {
   constructor(
     public roomService: RoomService,
     private router: Router) {
-      roomService.openRoomEmitter.subscribe(room => {
-        this.room = room;
-      })
+      roomService.openRoomEmitter.subscribe(room => this.room = room);
    }
 
   ngOnInit(): void {
