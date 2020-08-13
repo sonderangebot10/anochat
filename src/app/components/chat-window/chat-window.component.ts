@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RoomsService } from '../rooms-window/room-window.service';
+
 @Component({
   selector: 'app-chat-window',
   templateUrl: './chat-window.component.html',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatWindowComponent implements OnInit {
 
-  constructor() { }
+  constructor(public roomsService: RoomsService) { 
+    
+  }
 
   ngOnInit(): void {
   }

@@ -5,6 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RoomsWindowComponent } from './components/rooms-window/rooms-window.component';
+import { RoomUsersWindowComponent } from './components/room-users-window/room-users-window.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'user', component: UserProfileComponent,  canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'rooms', component: RoomsWindowComponent },
+  { path: 'users', component: RoomUsersWindowComponent },
 
   { path: '**', redirectTo: '/' }
 ];

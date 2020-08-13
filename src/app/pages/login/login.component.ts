@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   groupIdValue: string;
+  groupPasswordValue: string;
 
   constructor(public auth: AuthService, private router: Router) {
     if (auth.user$) {
