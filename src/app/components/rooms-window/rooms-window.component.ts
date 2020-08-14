@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 
 import { Room } from '../../../models/room.model';
+import { Message } from '../../../models/message.model';
 import { RoomService } from '../../services/room.service';
 
 @Component({
@@ -78,6 +79,14 @@ export class RoomsWindowComponent implements OnInit {
       return;
     }
 
+    const createRoomMessage = {
+      uid: uuid.v4(),
+      timestamp: new Date(),
+      message: "The room has been created",
+      ownerId: '',
+      ownerName: ''
+    }
+
     const uid = uuid.v4();
     const newRoom = {
       uid,
@@ -85,7 +94,8 @@ export class RoomsWindowComponent implements OnInit {
       password: roomInfo.group_password,
       owner: this.user.displayName,
       ownerId: this.user.uid,
-      guests: []
+      guests: [],
+      messages: [createRoomMessage]
     };
 
     if (this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === roomInfo.displayName))

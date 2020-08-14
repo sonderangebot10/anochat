@@ -18,8 +18,13 @@ export class RoomUsersWindowComponent implements OnInit {
 
   constructor(
     public roomService: RoomService,
-    private router: Router) {
-      roomService.openRoomEmitter.subscribe(room => this.room = room);
+    private router: Router,
+    private afs: AngularFirestore) {
+      roomService.openRoomEmitter.subscribe(room => {
+        this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
+          this.room = data.find(x => x.ownerId === room.ownerId && x.displayName === room.displayName); 
+        });    
+      });
    }
 
   ngOnInit(): void {

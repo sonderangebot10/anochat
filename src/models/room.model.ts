@@ -1,3 +1,5 @@
+import { Message } from './message.model';
+
 export interface Room {
     uid: string;
     displayName: string;
@@ -5,4 +7,5 @@ export interface Room {
     owner: string;
     ownerId: string;
     guests: string[];
+    messages: Message[];
   }
