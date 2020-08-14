@@ -22,7 +22,7 @@ export class ChatWindowComponent implements OnInit {
       roomService.openRoomEmitter.subscribe(room => {
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
           this.room = data.find(x => x.ownerId === room.ownerId && x.displayName === room.displayName);
-        });    
+        });
       });
    }
 

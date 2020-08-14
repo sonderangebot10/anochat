@@ -82,10 +82,10 @@ export class RoomsWindowComponent implements OnInit {
     const createRoomMessage = {
       uid: uuid.v4(),
       timestamp: new Date(),
-      message: "The room has been created",
+      message: 'The room has been created',
       ownerId: '',
       ownerName: ''
-    }
+    };
 
     const uid = uuid.v4();
     const newRoom = {

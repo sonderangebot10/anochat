@@ -10,8 +10,8 @@ import { defaultThrottleConfig } from 'rxjs/internal/operators/throttle';
 @Injectable({ providedIn: 'root' })
 export class RoomService {
 
-  private openRoom: Room; 
-  user: firebase.User;  
+  private openRoom: Room;
+  user: firebase.User;
   rooms: Room[];
 
   @Output() openRoomEmitter: EventEmitter<Room> = new EventEmitter();
@@ -21,8 +21,8 @@ export class RoomService {
     private afs: AngularFirestore) {
         afAuth.authState.subscribe(user => this.user = user);
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
-          this.rooms = data; 
-        });        
+          this.rooms = data;
+        });
    }
 
   toggle(room: Room) {
@@ -36,9 +36,9 @@ export class RoomService {
 
   removeUser(username: string) {
     this.afs.firestore.collection(`rooms`).doc(this.openRoom.uid).update({
-        "guests": firebase.firestore.FieldValue.arrayRemove(username)
+        guests: firebase.firestore.FieldValue.arrayRemove(username)
     }).then(_ => {
-        const updatedRoom = this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === this.openRoom.displayName)
+        const updatedRoom = this.rooms.find(x => x.ownerId === this.user.uid && x.displayName === this.openRoom.displayName);
         this.toggle(updatedRoom);
     });
   }
@@ -53,7 +53,7 @@ export class RoomService {
     };
 
     this.afs.firestore.collection(`rooms`).doc(this.openRoom.uid).update({
-      "messages": firebase.firestore.FieldValue.arrayUnion(newMessage)
+      messages: firebase.firestore.FieldValue.arrayUnion(newMessage)
     });
   }
 }

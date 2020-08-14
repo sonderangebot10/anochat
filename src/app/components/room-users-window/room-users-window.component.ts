@@ -22,8 +22,8 @@ export class RoomUsersWindowComponent implements OnInit {
     private afs: AngularFirestore) {
       roomService.openRoomEmitter.subscribe(room => {
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
-          this.room = data.find(x => x.ownerId === room.ownerId && x.displayName === room.displayName); 
-        });    
+          this.room = data.find(x => x.ownerId === room.ownerId && x.displayName === room.displayName);
+        });
       });
    }
 
