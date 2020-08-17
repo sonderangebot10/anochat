@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import * as uuid from 'uuid';
 
+import { DatePipe } from '@angular/common';
+
 import { Room } from '../../models/room.model';
 import { defaultThrottleConfig } from 'rxjs/internal/operators/throttle';
 
@@ -18,7 +20,8 @@ export class RoomService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore,
+    public datepipe: DatePipe) {
         afAuth.authState.subscribe(user => this.user = user);
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
           this.rooms = data;
@@ -46,7 +49,7 @@ export class RoomService {
   sendMessage(messageContent: string) {
     const newMessage = {
       uid: uuid.v4(),
-      timestamp: new Date(),
+      timestamp: this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss'),
       message: messageContent,
       ownerId: this.user.uid,
       ownerName: this.user.displayName

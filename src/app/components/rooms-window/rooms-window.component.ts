@@ -6,6 +6,8 @@ import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 
+import { DatePipe } from '@angular/common';
+
 import { Room } from '../../../models/room.model';
 import { Message } from '../../../models/message.model';
 import { RoomService } from '../../services/room.service';
@@ -30,7 +32,8 @@ export class RoomsWindowComponent implements OnInit {
     private afs: AngularFirestore,
     private formBuilder: FormBuilder,
     private router: Router,
-    public roomService: RoomService) {
+    public roomService: RoomService,
+    public datepipe: DatePipe) {
       afAuth.authState.subscribe(user => {
         this.user = user;
         this.afs.collection<Room>(`rooms`).valueChanges().subscribe(data => {
@@ -52,14 +55,14 @@ export class RoomsWindowComponent implements OnInit {
       group_password: ['']
     });
 
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 1000) {
       this.router.navigate(['/']);
     }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 1000) {
       this.router.navigate(['/']);
     }
   }
@@ -81,7 +84,7 @@ export class RoomsWindowComponent implements OnInit {
 
     const createRoomMessage = {
       uid: uuid.v4(),
-      timestamp: new Date(),
+      timestamp: this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss'),
       message: 'The room has been created',
       ownerId: '',
       ownerName: ''

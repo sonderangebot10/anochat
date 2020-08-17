@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RoomsWindowComponent } from './components/rooms-window/rooms-window.component';
 import { RoomUsersWindowComponent } from './components/room-users-window/room-users-window.component';
+import { ChatWindowComponent } from './components/chat-window/chat-window.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'rooms', component: RoomsWindowComponent },
   { path: 'users', component: RoomUsersWindowComponent },
+  { path: 'chat-mobile', component: ChatWindowComponent },
 
   { path: '**', redirectTo: '/' }
 ];

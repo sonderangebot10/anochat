@@ -41,12 +41,131 @@
 .example-viewport
     height: 100%
     width: 100%
-    //border: 1px solid black
 
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: 1000px)
     ::-webkit-scrollbar
         width: 0px
         background: transparent
 
 .message
     text-align: left
+
+@media only screen and (max-width: 1000px)
+    .top-section
+        margin-left: 5%
+        margin-right: 5%
+
+    .bottom-section
+        margin-left: 5%
+        margin-right: 5%
+
+    .outer-container
+        height: 80%
+
+.example-container
+  display: flex
+  padding: 10px
+
+.message-box
+  float: left
+  width: 98%
+  margin: 5px 0 0 2%
+
+p
+    text-align: left
+
+.chat-message
+  width: 80%
+  min-height: 40px
+  
+
+  .right-bubble
+    position: relative
+    background: #dcf8c6
+    border-top-left-radius: .4em
+    border-bottom-left-radius: .4em
+    border-bottom-right-radius: .4em
+    padding: 5px 10px 10px
+    left: 15%
+
+    span
+      &.msg-name
+        font-size: 12px
+        font-weight: bold
+        color: green
+
+      &.msg-date
+        font-size: 10px
+
+    &:after
+      content: ''
+      position: absolute
+      right: 0
+      top: 13px
+      width: 0
+      height: 0
+      border: 27px solid transparent
+      border-left-color: #dcf8c6
+      border-right: 0
+      border-top: 0
+      margin-top: -13.5px
+      margin-right: -27px
+
+  .left-bubble
+    position: relative
+    background: lightblue
+    border-top-right-radius: .4em
+    border-bottom-left-radius: .4em
+    border-bottom-right-radius: .4em
+    padding: 5px 10px 10px
+    left: 5%
+
+    span
+      &.msg-name
+        font-size: 12px
+        font-weight: bold
+        color: blue
+
+      &.msg-date
+        font-size: 10px
+
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      top: 13px
+      width: 0
+      height: 0
+      border: 27px solid transparent
+      border-right-color: lightblue
+      border-left: 0
+      border-top: 0
+      margin-top: -13.5px
+      margin-left: -27px
+
+  .chat-status
+    min-height: 49px
+
+    .chat-date
+      display: block
+      font-size: 10px
+      font-style: italic
+      color: #fff
+      text-shadow: 0px -1px 0px #222, 0px 1px 0px #aaa
+      height: 15px
+      left: 10%
+      right: 10%
+
+    .chat-content-center
+      padding: 5px 10px
+      background-color: #e1e1f7
+      border-radius: 6px
+      font-size: 12px
+      color: #555
+      height: 34px
+      left: 10%
+      right: 10%
+
+.chat-content
+  overflow-y: scroll
+  height: 100%

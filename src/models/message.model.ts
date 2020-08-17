@@ -1,6 +1,6 @@
 export interface Message {
     uid: string;
-    timestamp: Date;
+    timestamp: string;
     message: string;
     ownerId: string;
     ownerName: string;

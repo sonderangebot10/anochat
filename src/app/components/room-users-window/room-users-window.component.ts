@@ -28,14 +28,14 @@ export class RoomUsersWindowComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 1000) {
       this.router.navigate(['/']);
     }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 1000) {
       this.router.navigate(['/']);
     }
   }
