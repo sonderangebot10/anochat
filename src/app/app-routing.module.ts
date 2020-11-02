@@ -10,14 +10,11 @@ import { ChatWindowComponent } from './components/chat-window/chat-window.compon
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent,  canActivate: [AuthGuard] },
+  { path: '', component: LoginComponent,  canActivate: [AuthGuard] },
   { path: 'user', component: UserProfileComponent,  canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'rooms', component: RoomsWindowComponent },
-  { path: 'users', component: RoomUsersWindowComponent },
-  { path: 'chat-mobile', component: ChatWindowComponent },
 
-  { path: '**', redirectTo: '/' }
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

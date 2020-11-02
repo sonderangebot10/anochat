@@ -7,31 +7,15 @@
     <ng-template #authenticated>
         <div *ngIf="auth.user$ | async as user">
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                <img src="../../../assets/logo.png" class="navbar-brand" (click)="router.navigate(['/']);"/>
+                <img src="../../../assets/logo.png" class="navbar-brand" />
                 <button class="navbar-toggler" type="button" (click)="headerService.toggle()" [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
                 <div class="collapse navbar-collapse" [ngbCollapse]="!navbarCollapsed" id="navbarSupportedContent" >
                 <ul class="navbar-nav mr-auto" (click)="headerService.toggle()" >
-                    <li class="nav-item active" >
-                        <button class="navbutt" mat-raised-button (click)="router.navigate(['/']);" >
-                            Dashboard
-                        </button>
-                    </li>
                     <li class="nav-item">
                         <button class="navbutt" mat-raised-button (click)="router.navigate(['/user']);">
                             User
-                        </button>
-                    </li>
-                    <li class="nav-item mobile">
-                        <button class="navbutt" mat-raised-button (click)="router.navigate(['/rooms']);">
-                            Rooms
-                        </button>
-                    </li>
-                    <li class="nav-item mobile">
-                        <button class="navbutt" mat-raised-button (click)="router.navigate(['/users']);">
-                            Users In Room
                         </button>
                     </li>
                 </ul>
@@ -39,4 +23,4 @@
             </nav>
         </div>
     </ng-template>
-</div>
+</div>      
